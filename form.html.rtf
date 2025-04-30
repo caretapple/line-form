@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg932\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html>\
+<head>\
+  <meta charset="UTF-8">\
+  <title>\uc0\u12372 \u30456 \u35527 \u12501 \u12457 \u12540 \u12512 </title>\
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+  <style>\
+    body \{\
+      font-family: sans-serif;\
+      background-color: #f5f5ed;\
+      color: #333;\
+      padding: 20px;\
+    \}\
+    .form-container \{\
+      background-color: #e6f0e6;\
+      padding: 20px;\
+      border-radius: 16px;\
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\
+    \}\
+    label \{\
+      display: block;\
+      margin: 12px 0 4px;\
+    \}\
+    input, select, textarea \{\
+      width: 100%;\
+      padding: 10px;\
+      border: 1px solid #ccc;\
+      border-radius: 8px;\
+    \}\
+    button \{\
+      margin-top: 20px;\
+      background-color: #88b388;\
+      color: white;\
+      padding: 12px;\
+      border: none;\
+      border-radius: 8px;\
+      font-size: 16px;\
+      width: 100%;\
+    \}\
+  </style>\
+</head>\
+<body>\
+  <div class="form-container">\
+    <h2>\uc0\u12372 \u30456 \u35527 \u12501 \u12457 \u12540 \u12512 </h2>\
+    <form id="consultForm">\
+      <label>1. \uc0\u12372 \u24180 \u40802 \u12539 \u24615 \u21029 </label>\
+      <input type="text" name="ageGender" required>\
+\
+      <label>2. \uc0\u35201 \u20171 \u35703 \u35469 \u23450 \u12539 \u21307 \u30274 \u12398 \u29366 \u27841 </label>\
+      <input type="text" name="nursingCare" required>\
+\
+      <label>3. \uc0\u35469 \u30693 \u30151 \u12398 \u26377 \u28961 \u12539 \u31243 \u24230 </label>\
+      <input type="text" name="dementia" required>\
+\
+      <label>4. \uc0\u29694 \u22312 \u12398 \u20303 \u12414 \u12356 \u12539 \u29366 \u27841 </label>\
+      <input type="text" name="currentStatus" required>\
+\
+      <label>5. \uc0\u12372 \u24076 \u26395 \u12398 \u12456 \u12522 \u12450 </label>\
+      <input type="text" name="area" required>\
+\
+      <label>6. \uc0\u26376 \u38989 \u20104 \u31639 \u65288 \u30446 \u23433 \u65289 </label>\
+      <input type="text" name="budget" required>\
+\
+      <label>7. \uc0\u37325 \u35222 \u12509 \u12452 \u12531 \u12488 \u65288 \u35079 \u25968 \u21487 \u65289 </label>\
+      <input type="text" name="priority" required>\
+\
+      <label>8. \uc0\u12381 \u12398 \u20182 \u12372 \u35201 \u26395 \u12539 \u36899 \u32097 \u25163 \u27573 </label>\
+      <textarea name="other" rows="3"></textarea>\
+\
+      <button type="submit">\uc0\u36865 \u20449 \u12377 \u12427 </button>\
+    </form>\
+    <p id="statusMsg"></p>\
+  </div>\
+\
+  <script>\
+    const form = document.getElementById('consultForm');\
+    form.addEventListener('submit', async (e) => \{\
+      e.preventDefault();\
+      const formData = new FormData(form);\
+      const data = \{\
+        ageGender: formData.get('ageGender'),\
+        nursingCare: formData.get('nursingCare'),\
+        dementia: formData.get('dementia'),\
+        currentStatus: formData.get('currentStatus'),\
+        area: formData.get('area'),\
+        budget: formData.get('budget'),\
+        priority: formData.get('priority'),\
+        other: formData.get('other')\
+      \};\
+\
+      const webhookUrl = "https://script.google.com/macros/s/AKfycbx5rh2S90pSx4JripRRp8ItoWEwP8_BjCHGX1HIllw0ehx8v_MUzSXzxMrxUmm7UsOfEw/exec";\
+\
+      try \{\
+        const res = await fetch(webhookUrl, \{\
+          method: "POST",\
+          body: JSON.stringify(data),\
+          headers: \{\
+            "Content-Type": "application/json"\
+          \}\
+        \});\
+\
+        document.getElementById('statusMsg').innerText = "\uc0\u36865 \u20449 \u12364 \u23436 \u20102 \u12375 \u12414 \u12375 \u12383 \u12290 \u12354 \u12426 \u12364 \u12392 \u12358 \u12372 \u12374 \u12356 \u12414 \u12375 \u12383 \u65281 ";\
+        form.reset();\
+      \} catch (err) \{\
+        document.getElementById('statusMsg').innerText = "\uc0\u36865 \u20449 \u12395 \u22833 \u25943 \u12375 \u12414 \u12375 \u12383 \u12290 \u20877 \u24230 \u12362 \u35430 \u12375 \u12367 \u12384 \u12373 \u12356 \u12290 ";\
+      \}\
+    \});\
+  </script>\
+</body>\
+</html>\
+}
